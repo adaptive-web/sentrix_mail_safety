@@ -84,10 +84,7 @@ class SentrixMailSafetyCommands extends DrushCommands {
     if ($environment === 'unknown') {
       throw new MailSafetyVerificationException('Refusing to run the Mail Safety verification in an unknown environment.');
     }
-    if (
-      $environment === 'live'
-      && (!array_key_exists('allow-live', $options) || !$this->is_affirmative($options['allow-live']))
-    ) {
+    if ($environment === 'live' && !$this->is_affirmative($options['allow-live'] ?? FALSE)) {
       throw new MailSafetyVerificationException('Refusing to run the Mail Safety verification on Live without --allow-live.');
     }
 
@@ -113,13 +110,7 @@ class SentrixMailSafetyCommands extends DrushCommands {
     );
 
     if ($environment === 'live') {
-      if (
-        !is_array($result)
-        || !array_key_exists('send', $result)
-        || $result['send'] !== TRUE
-        || !array_key_exists('result', $result)
-        || $result['result'] !== TRUE
-      ) {
+      if (($result['send'] ?? FALSE) !== TRUE || ($result['result'] ?? FALSE) !== TRUE) {
         throw new MailSafetyVerificationException('Drupal did not accept the Live verification message for delivery.');
       }
 
@@ -158,7 +149,7 @@ class SentrixMailSafetyCommands extends DrushCommands {
   private function resolve_recipient($positional_recipient, array $options, $token, $is_live) {
     $positional_recipient = $this->normalize_recipient($positional_recipient, 'positional recipient');
     $option_recipient = $this->normalize_recipient(
-      array_key_exists('recipient', $options) ? $options['recipient'] : NULL,
+      $options['recipient'] ?? NULL,
       '--recipient option'
     );
 
@@ -170,7 +161,7 @@ class SentrixMailSafetyCommands extends DrushCommands {
       throw new \InvalidArgumentException('The positional recipient and --recipient option must match when both are supplied.');
     }
 
-    $recipient = $positional_recipient !== NULL ? $positional_recipient : $option_recipient;
+    $recipient = $positional_recipient ?? $option_recipient;
     if ($recipient === NULL) {
       if ($is_live) {
         throw new \InvalidArgumentException('Live verification requires an explicit valid recipient that does not end in .invalid.');
@@ -245,20 +236,13 @@ class SentrixMailSafetyCommands extends DrushCommands {
       }
 
       if (
-        !array_key_exists('send', $mail)
-        || $mail['send'] !== FALSE
-        || !array_key_exists('to', $mail)
-        || $mail['to'] !== $recipient
-        || !array_key_exists('module', $mail)
-        || $mail['module'] !== 'sentrix_mail_safety'
-        || !array_key_exists('key', $mail)
-        || $mail['key'] !== 'verification'
-        || !array_key_exists('subject', $mail)
-        || $mail['subject'] !== $subject
-        || !array_key_exists('body', $mail)
-        || $mail['body'] !== array($body)
-        || !array_key_exists('token', $mail['params'])
-        || $mail['params']['token'] !== $token
+        ($mail['send'] ?? NULL) !== FALSE
+        || ($mail['to'] ?? NULL) !== $recipient
+        || ($mail['module'] ?? NULL) !== 'sentrix_mail_safety'
+        || ($mail['key'] ?? NULL) !== 'verification'
+        || ($mail['subject'] ?? NULL) !== $subject
+        || ($mail['body'] ?? NULL) !== array($body)
+        || ($mail['params']['token'] ?? NULL) !== $token
       ) {
         continue;
       }
@@ -273,7 +257,7 @@ class SentrixMailSafetyCommands extends DrushCommands {
    * Returns the current known deployment environment.
    */
   private function environment() {
-    $environment = isset($_ENV['PANTHEON_ENVIRONMENT']) ? $_ENV['PANTHEON_ENVIRONMENT'] : getenv('PANTHEON_ENVIRONMENT');
+    $environment = $_ENV['PANTHEON_ENVIRONMENT'] ?? getenv('PANTHEON_ENVIRONMENT');
     if (!is_string($environment) || trim($environment) === '') {
       $environment = getenv('PANTHEON_ENVIRONMENT');
     }
@@ -281,15 +265,11 @@ class SentrixMailSafetyCommands extends DrushCommands {
       return $environment === 'live' ? 'live' : 'non-live';
     }
 
-    $ddev = isset($_ENV['IS_DDEV_PROJECT']) ? $_ENV['IS_DDEV_PROJECT'] : getenv('IS_DDEV_PROJECT');
+    $ddev = $_ENV['IS_DDEV_PROJECT'] ?? getenv('IS_DDEV_PROJECT');
     if (!is_string($ddev) || $ddev === '') {
       $ddev = getenv('IS_DDEV_PROJECT');
     }
-    if ($ddev === 'true') {
-      return 'non-live';
-    }
-
-    return 'unknown';
+    return $ddev === 'true' ? 'non-live' : 'unknown';
   }
 
 }

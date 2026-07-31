@@ -55,7 +55,6 @@ pre-update-cmd, post-update-cmd, post-install-cmd, post-autoload-dump
 "@link-sentrix-mail-safety"
 ],
 "post-update-cmd": [
-"DrupalComposerManaged\\ComposerScripts::postUpdate",
 "@link-sentrix-mail-safety"
 ],
 "post-install-cmd": [
