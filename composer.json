@@ -1,5 +1,5 @@
 {
-  "name": "adaptive-web/sentrix_main_safety",
+  "name": "adaptive-web/sentrix_mail_safety",
   "description": "Testing Email drush command",
   "type": "drupal-module",
   "license": "proprietary",
