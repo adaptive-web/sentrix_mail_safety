@@ -1,0 +1,18 @@
+<?php
+
+/**
+ * @file
+ * Mail callbacks for the Sentrix Mail Safety module.
+ */
+
+/**
+ * Implements hook_mail().
+ */
+function sentrix_mail_safety_mail($key, &$message, $params) {
+  if ($key !== 'verification') {
+    return;
+  }
+
+  $message['subject'] = $params['subject'];
+  $message['body'][] = $params['body'];
+}

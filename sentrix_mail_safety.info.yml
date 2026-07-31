@@ -1,0 +1,5 @@
+name: 'Sentrix Mail Safety'
+type: module
+description: 'Provides a controlled Mail Safety verification command.'
+package: 'Adaptive Web'
+core_version_requirement: ^9.4 || ^10 || ^11
