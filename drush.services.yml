@@ -2,10 +2,6 @@ services:
   sentrix_mail_safety.commands:
     class: Drupal\sentrix_mail_safety\Commands\SentrixMailSafetyCommands
     arguments:
-      - '@config.factory'
-      - '@database'
-      - '@module_handler'
       - '@plugin.manager.mail'
-      - '@language_manager'
     tags:
       - { name: drush.command }
