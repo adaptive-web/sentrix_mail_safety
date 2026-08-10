@@ -35,7 +35,7 @@ class SentrixMailSafetyCommands extends DrushCommands {
    *   Command options.
    *
    * @command sentrix:mail-safety-test
-   * @aliases sentrix-mail-safety-test
+   * @aliases sentrixmailtest
    * @option recipient The email address to send the test message to.
    * @usage drush sentrix:mail-safety-test someone@example.com
    * @usage drush sentrix:mail-safety-test --recipient=someone@example.com
