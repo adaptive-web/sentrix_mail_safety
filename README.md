@@ -7,9 +7,9 @@ Every time you do an update eg v1.0.1
 
 `git tag -l`
 
-`git tag v1.0.4`
+`git tag v1.0.5`
 
-`git push origin v1.0.4`
+`git push origin v1.0.5`
 
 ---
 `ddev composer require adaptive-web/sentrix_mail_safety:1.0.0`
@@ -24,7 +24,8 @@ When "repositories" is named use it
 ```
     "sentrix_mail_safety":{
         "type": "vcs",
-        "url": "git@github.com:adaptive-web/sentrix_mail_safety.git"
+        "url": "git@github.com:adaptive-web/sentrix_mail_safety.git",
+        "no-api": true
     },
 ```
 When its not named 
@@ -32,7 +33,8 @@ When its not named
 ```
     {
         "type": "vcs",
-        "url": "git@github.com:adaptive-web/sentrix_mail_safety.git"
+        "url": "git@github.com:adaptive-web/sentrix_mail_safety.git",
+        "no-api": true
     },
 ```
 
@@ -40,9 +42,9 @@ Under "scripts" section add the following:
 `"link-sentrix-mail-safety": "if [ -d sentrix_mail_safety ]; then echo \"Linking sentrix_mail_safety...\"; rm -rf web/modules/contrib/sentrix_mail_safety && ln -sfn ../../../sentrix_mail_safety web/modules/contrib/sentrix_mail_safety; fi",
 `
 
-`ddev composer require adaptive-web/sentrix_mail_safety:1.0.4`
+`ddev composer require adaptive-web/sentrix_mail_safety:1.0.5`
 
-Next you do an update run `ddev composer require adaptive-web/sentrix_mail_safety:1.0.1`
+Next you do an update run `ddev composer require adaptive-web/sentrix_mail_safety:1.0.5`
 
 
 Respect what scripts you have + add this:
