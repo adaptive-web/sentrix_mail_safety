@@ -12,9 +12,6 @@ Every time you do an update eg v1.0.1
 `git push origin v1.0.5`
 
 ---
-`ddev composer require adaptive-web/sentrix_mail_safety:1.0.0`
-
----
 # Site notes: 
 
 Sits in "repositories": 
