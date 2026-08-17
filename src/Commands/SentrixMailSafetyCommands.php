@@ -37,8 +37,7 @@ class SentrixMailSafetyCommands extends DrushCommands {
    * @command sentrix:mail-safety-test
    * @aliases sentrixmailtest
    * @option recipient The email address to send the test message to.
-   * @usage drush sentrix:mail-safety-test someone@example.com
-   * @usage drush sentrix:mail-safety-test --recipient=someone@example.com
+   * @usage drush sentrix:mail-safety-test --recipient=someone@adaptive.co.uk or using terminus drush SITE.ENV --  sentrix:mail-safety-test --recipient=someone@adaptive.co.uk
    */
   public function mailSafetyTest($recipient = NULL, array $options = array('recipient' => NULL)) {
     $recipient = $recipient ?? $options['recipient'] ?? NULL;

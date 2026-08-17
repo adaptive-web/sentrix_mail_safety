@@ -7,9 +7,9 @@ Every time you do an update eg v1.0.1
 
 `git tag -l`
 
-`git tag v1.0.5`
+`git tag v1.0.6`
 
-`git push origin v1.0.5`
+`git push origin v1.0.6`
 
 ---
 # Site notes: 
@@ -37,7 +37,7 @@ When its not named
 # Install
 
 ## Install via composer 
-`ddev composer require adaptive-web/sentrix_mail_safety:1.0.5`
+`ddev composer require adaptive-web/sentrix_mail_safety:1.0.6`
 
 ## Enable in DDEV
 `ddev drush en sentrix_mail_safety`
